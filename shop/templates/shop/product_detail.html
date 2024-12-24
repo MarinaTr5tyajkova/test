@@ -1,0 +1,17 @@
+<!-- templates/shop/product_detail.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ product.name }}</h2>
+
+<img src="{{ product.image.url }}" alt="{{ product.name }}">
+<p>{{ product.description }}</p>
+<p>Цена: {{ product.price }}₽</p>
+
+<button onclick="alert('Товар добавлен в корзину!')">Заказать товар</button>
+
+<a href="{% url 'product_list' %}">Назад к товарам</a>
+
+{% endblock %}

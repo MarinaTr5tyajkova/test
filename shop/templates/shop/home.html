@@ -1,0 +1,23 @@
+<!-- templates/shop/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<h2>Описание магазина</h2>
+
+<form method="GET" action="{% url 'search_result' %}">
+    <input type="text" name="query" placeholder="Поиск товаров или услуг">
+    <button type="submit">Поиск</button>
+</form>
+
+<h3>Последние товары:</h3>
+<ul>
+{% for product in products %}
+    <li><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a> - {{ product.price }}₽
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

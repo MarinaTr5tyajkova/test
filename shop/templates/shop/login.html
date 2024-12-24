@@ -1,0 +1,19 @@
+<!-- templates/shop/login.html -->
+{% extends "base.html" %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+<h2>Авторизация</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Войти</button>
+</form>
+
+{% if form.non_field_errors %}
+<div style="color: red;">{{ form.non_field_errors }}</div> <!-- Отображаем ошибки формы -->
+{% endif %}
+
+{% endblock %}

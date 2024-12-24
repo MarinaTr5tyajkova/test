@@ -1,0 +1,24 @@
+<!-- templates/shop/search_results.html -->
+{% extends "base.html" %}
+
+{% block title %}Результаты поиска{% endblock %}
+
+{% block content %}
+<h2>Результаты поиска для "{{ request.GET.query }}":</h2>
+
+<ul>
+{% if products %}
+    {% for product in products %}
+        <li>
+            <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a> - {{ product.price }}₽
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </li>
+    {% endfor %}
+{% else %}
+    <li>Товары не найдены.</li>
+{% endif %}
+</ul>
+
+<a href="{% url 'home' %}">Вернуться на главную страницу</a>
+
+{% endblock %}

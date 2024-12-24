@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<h2>Профиль пользователя</h2>
+
+<div>
+    <h3>Информация о пользователе:</h3>
+    <p><strong>Аватар:</strong></p>
+    {% if user.avatar %}
+        <img src="{{ user.avatar.url }}" alt="Аватар" style="width:100px;height:auto;">
+    {% else %}
+        <p>Аватар не установлен.</p>
+    {% endif %}
+    <p><strong>Имя пользователя:</strong> {{ user.username }}</p>
+    <p><strong>Логин:</strong> {{ user.username }}</p>
+    <p><strong>Почта:</strong> {{ user.email }}</p>
+</div>
+
+<div>
+    <h3>Ваши заказы:</h3>
+    {% if orders %}
+        <ul>
+        {% for order in orders %}
+            <li>
+                <a href="{% url 'product_detail' order.product.pk %}">{{ order.product.name }}</a> - Заказано {{ order.created_at }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>У вас нет заказов.</p>
+    {% endif %}
+</div>
+
+<a href="{% url 'home' %}">Вернуться на главную страницу</a>
+
+{% endblock %}
